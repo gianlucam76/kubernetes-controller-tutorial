@@ -34,6 +34,7 @@ To summarize:
 To see all the available API resources in your cluster: ```kubectl api-resources```
 
 ```
+$ kubectl api-resources
 NAME                                SHORTNAMES   APIVERSION                                NAMESPACED   KIND
 bindings                                         v1                                        true         Binding
 configmaps                          cm           v1                                        true         ConfigMap
