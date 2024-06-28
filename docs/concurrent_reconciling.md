@@ -51,6 +51,8 @@ type Type struct {
 	// processing something and remove it from this set, we'll check if
 	// it's in the dirty set, and if so, add it to the queue.
 	processing set
+
+	...
 ```
 
 The `dirty` set plays a crucial role in deduplication. When a resource needs reconciliation, it's checked against the `dirty` set. If the resource (like our example resource A) is already present, it's not added again, even if it undergoes further changes in a short timeframe. This prevents redundant processing of the same resource for multiple, quick updates.
