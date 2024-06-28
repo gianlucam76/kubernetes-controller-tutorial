@@ -86,3 +86,6 @@ In above example, _A_ is picked to be reconciled. _A_ is added to the `processin
 Concurrent reconciliation is a powerful feature in Kubernetes controllers that can significantly improve performance when managing a large number of frequently changing resources. By running multiple reconcile loops concurrently, the controller can process updates much faster and ensure your deployments reach their desired state more quickly.
 
 This approach avoids the potential delays caused by a single reconcile queue, but it also implements safeguards to prevent conflicts. The workqueue guarantees that resources are not processed simultaneously, ensuring data consistency and preventing race conditions.
+
+[Sveltos](https://github.com/projectsveltos/libsveltos/blob/c8675b616482d67412a5520e83809ccd0fb0f412/lib/deployer/client.go#L37) uses similar queue to handle long running jobs. 
+
