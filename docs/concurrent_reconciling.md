@@ -63,7 +63,7 @@ This deduplication capability is a core aspect of concurrent reconciliation. It 
   <img alt="Queueing to Dirty Set" src="assets/queueing_to_dirty_set.png" width="600"/>
 </p>
 
-The `processing` set plays a vital role in preventing same resource being reconciled multiple times concurrently. After being added to the `dirty` set, a resource is only added to the `queue` if it's not already present in the `processing` set. The `processing` set essentially tracks resources that are currently undergoing reconciliation.
+The `processing` set plays a vital role in preventing same resource being reconciled multiple times concurrently. After being added to the `dirty` set, a resource is only added to the `queue` if it's not already present in the `processing` set. The `processing` set essentially tracks resources that are currently undergoing reconciliation[^1].
 
 Consider this scenario: Imagine a resource named _C_ changes. If _C_ is already in the `processing` set (meaning it's being reconciled), it won't be added to the `queue` again. This avoids the controller from starting multiple reconciliations for the same resource simultaneously.
 
@@ -73,7 +73,7 @@ On the other hand, if a resource like _D_ changes and isn't currently processing
   <img alt="Add to Queue" src="assets/add_to_queue.png" width="600"/>
 </p>
 
-When the reconciliation process is ready for a new task, it grabs the first one in line from the `queue`. This item is then marked as being worked on by adding it to the `processing` set. Finally, it's removed from the `dirty` set, indicating it's no longer waiting for reconciliation.
+When the reconciliation process is ready for a new task, it grabs the first one in line from the `queue`. This item is then marked as being worked on by adding it to the `processing` set. Finally, it's removed from the `dirty` set, indicating it's no longer waiting for reconciliation[^2].
 
 <p align="center">
   <img alt="Add to Queue" src="assets/pick_next_resource_to_reconcile.png" width="600"/>
@@ -88,4 +88,7 @@ Concurrent reconciliation is a powerful feature in Kubernetes controllers that c
 This approach avoids the potential delays caused by a single reconcile queue, but it also implements safeguards to prevent conflicts. The workqueue guarantees that resources are not processed simultaneously, ensuring data consistency and preventing race conditions.
 
 [Sveltos](https://github.com/projectsveltos/libsveltos/blob/c8675b616482d67412a5520e83809ccd0fb0f412/lib/deployer/client.go#L37) uses similar queue to handle long running jobs. 
+
+[^1]: [Add code](https://github.com/kubernetes/client-go/blob/a57d0056dbf1d48baaf3cee876c123bea745591f/util/workqueue/queue.go#L108).
+[^2]: [Get code](https://github.com/kubernetes/client-go/blob/a57d0056dbf1d48baaf3cee876c123bea745591f/util/workqueue/queue.go#L141).
 
