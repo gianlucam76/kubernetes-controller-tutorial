@@ -59,6 +59,8 @@ The `dirty` set plays a crucial role in deduplication. When a resource needs rec
 
 This deduplication capability is a core aspect of concurrent reconciliation. It ensures the controller focuses on the actual cluster state, obtained from the apiserver or local cache, rather than reacting to every individual event update. This streamlines the process and avoids unnecessary work.
 
+Remember, reconciliation is level-based, meaning action isn't driven off changes in individual events, but instead is driven by actual cluster state read from the apiserver or a local cache.
+
 <p align="center">
   <img alt="Queueing to Dirty Set" src="assets/queueing_to_dirty_set.png" width="600"/>
 </p>
