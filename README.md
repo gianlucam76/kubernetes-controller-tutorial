@@ -12,6 +12,7 @@ We will be using [Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) t
 Table of Contents:
 - [CustomResourceDefinition](docs/custom-resources.md)
 - [Reconciler](docs/reconciler.md)
+- [Concurrent Reconciling](docs/concurrent_reconciling.md)
 - [Handling Long-Running Operations in Kubernetes Reconcilers](docs/long-running-jobs.md)
 - [Versioning Custom Resource Definitions (CRDs) in Kubernetes](docs/multiple_versions.md)
 - [Testing a Controller](docs/testing.md)
