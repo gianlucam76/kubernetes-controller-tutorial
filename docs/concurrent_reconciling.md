@@ -1,5 +1,3 @@
-https://openkruise.io/blog/learning-concurrent-reconciling/
-
 # Concurrent Reconciling
 
 When setting up a Kubernetes controller, we have seen that controller supports concurrent reconciliations.
