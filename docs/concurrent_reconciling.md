@@ -83,6 +83,8 @@ When the reconciliation process is ready for a new task, it grabs the first one 
 
 In above example, _A_ is picked to be reconciled. _A_ is added to the `processing` set and removed from the `dirty` set.
 
+Once reconciling a resource completes, the resource is removed from the `processing` set. If it's also on in the `dirty` set, it's then added to the `queue`[^3].
+
 ## Conclusion
 
 Concurrent reconciliation is a powerful feature in Kubernetes controllers that can significantly improve performance when managing a large number of frequently changing resources. By running multiple reconcile loops concurrently, the controller can process updates much faster and ensure your deployments reach their desired state more quickly.
@@ -93,4 +95,5 @@ This approach avoids the potential delays caused by a single reconcile queue, bu
 
 [^1]: [Add code](https://github.com/kubernetes/client-go/blob/a57d0056dbf1d48baaf3cee876c123bea745591f/util/workqueue/queue.go#L108).
 [^2]: [Get code](https://github.com/kubernetes/client-go/blob/a57d0056dbf1d48baaf3cee876c123bea745591f/util/workqueue/queue.go#L141).
+[^3]: [Done code](https://github.com/kubernetes/client-go/blob/a57d0056dbf1d48baaf3cee876c123bea745591f/util/workqueue/queue.go#L165).
 
